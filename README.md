@@ -15,20 +15,20 @@ userProfileService.getUserProfile()
 ## Instructions
 See app.js for an example. Remember this code must be running from within a SharePoint site, since it calls the SharePoint API.
 
-1. Reference the module in your app module definition
+1 Reference the module in your app module definition
 ```javascript
 var app = angular.module('spUserProfileExample', ['spUserProfile']);
 ```
-2. Inject the userProfileService into your controller/service/factory
+2 Inject the userProfileService into your controller/service/factory
 ```javascript
 exampleController.$inject = ['userProfileService'];
 ```
-3. Call the getUserProfile() async method of the userProfileService
+3 Call the getUserProfile() async method of the userProfileService
 ```javascript
  userProfileService.getUserProfile()
             .then(success, error);
 ```
-4. Access the properties of the response object by calling the properties as functions
+4 Access the properties of the response object by calling the properties as functions
 ```javascript
 function success(response) {
             var firstName = response.FirstName();
