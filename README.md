@@ -34,3 +34,9 @@ function success(response) {
             var firstName = response.FirstName();
 }
 ```
+**Note: The user properties whose key contains a hyphen will be stripped of the hyphen when the property is created on the object. Reference these function properties by the same name without the hyphen.**
+```javascript
+            // the property returned is called SPS-JobTitle
+            var title = response.SPSJobTitle();
+```
+
