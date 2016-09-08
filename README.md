@@ -39,4 +39,29 @@ function success(response) {
             // the property returned is called SPS-JobTitle
             var title = response.SPSJobTitle();
 ```
-
+### Getting Other Properties
+You can add more properties to be returned from the userProfileService. Here are the properties returned by default.
+```javascript
+            'SPS-DistinguishedName',
+            'SID',
+            'Manager',
+            'PreferredName',
+            'FirstName',
+            'LastName',
+            'SPS-PhoneticDisplayName',
+            'SPS-PhoneticFirstName',
+            'SPS-PhoneticLastName',
+            'WorkPhone',
+            'WorkEmail',
+            'Office',
+            'SPS-JobTitle',
+            'Department',
+            'UserName',
+            'PublicSiteRedirect',
+            'SPS-ProxyAddresses',
+            'SPS-SourceObjectDN',
+            'SPS-ClaimID',
+            'SPS-ClaimProviderID',
+            'SPS-ClaimProviderType'
+```
+To add more properties or to modify the existing properties, override the `spUserProfileConfig` object to add/change/remove properties from the `properties` array.
