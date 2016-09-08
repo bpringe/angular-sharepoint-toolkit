@@ -11,7 +11,7 @@ userProfileService.getUserProfile()
             });
 ```
 
-## Instructions
+## Usage
 See app.js for an example. Remember this code must run from within a SharePoint site, since it calls the SharePoint API.
 
 1.. Reference the module in your app module definition
@@ -38,7 +38,8 @@ function success(response) {
     // the property returned is called SPS-JobTitle
     var title = response.SPSJobTitle();
 ```
-### Getting Other Properties
+
+## Configuration
 You can add more properties to be returned from the userProfileService. Here are the properties returned by default.
 ```javascript
             'SPS-DistinguishedName',
@@ -70,5 +71,13 @@ var app = angular.module('yourModule', ['spUserProfile'])
             spUserProfileConfig.properties.push('yourCustomProperty');
             spUserProfileConfig.properties.push('yourOtherCustomProperty');
             // etc... just remember properties is an array of strings
+   }]);
+```
+### Changing the URL
+If you want to modify the URL that the request for properties uses, set the `url` property of the `spUserProfileConfig` object.
+```javascript
+var app = angular.module('yourModule', ['spUserProfile'])
+   .config(['spUserProfileConfig', function(spUserProfileConfig) {
+            spUserProfileConfig.url = 'http://someotherdomain.com/_api/SP.UserProfiles.PeopleManager/GetMyProperties';
    }]);
 ```
