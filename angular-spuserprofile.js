@@ -25,7 +25,7 @@
             'SPS-ClaimProviderID',
             'SPS-ClaimProviderType'
         ],
-        url: window.location.origin + '/_api/SP.UserProfiles.PeopleManager/GetMyProperties'
+        url: _spPageContextInfo.siteAbsoluteUrl + '/_api/SP.UserProfiles.PeopleManager/GetMyProperties'
     });
 
     ////////////////////////////// userProfileService
