@@ -1,5 +1,5 @@
 # angular-spuserprofile
-A simple Angular module for getting SharePoint User Profile properties. The Angular service calls the SharePoint rest API to get the current user's properties by default and returns an object with the user properties set as functions of the object. The service only performs a lookup in the array of key value pairs returned from the API when the property desired is referenced as a function on the object.
+A simple Angular module for getting SharePoint User Profile properties. The Angular service calls the SharePoint rest API to get the current user's properties and returns an object with the user properties as functions of the object. The service only performs a lookup in the array of key value pairs returned from the API when the property desired is referenced as a function on the object.
 ```javascript
 userProfileService.getUserProfile()
             .then(function(response) {
@@ -12,7 +12,7 @@ userProfileService.getUserProfile()
 ```
 
 ## Usage
-See app.js for an example. Remember this code must run from within a SharePoint site, since it calls the SharePoint API.
+See app.js for an example. Remember, this code must run from within a SharePoint site since it calls the SharePoint API.
 
 1.. Reference the module in your app module definition
 ```javascript
