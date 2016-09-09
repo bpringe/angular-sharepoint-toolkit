@@ -10,6 +10,8 @@ userProfileService.getUserProfile()
                 console.log(error);
             });
 ```
+##Installation
+Download the `angular-spuserprofile.js` file and reference it with a script tag after the angular reference in your html file.
 
 ## Usage
 See app.js for an example. Remember, this code must run from within a SharePoint site since it calls the SharePoint API.
