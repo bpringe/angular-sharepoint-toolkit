@@ -2,7 +2,8 @@
 An AngularJS module that simplifies common tasks when writing Angular apps for SharePoint, such as getting user profile properties and getting an always-current request digest value for use in post and put requests. At this time, the module contains these two components than can be injected into your components:
 - **userProfileService**
 - **requestDigestService**
-I'm open to any suggestions for changes or additions.
+
+I'm open to any suggestions for changes or additions to this module!
 
 ##Installation
 Download the `angular-sharepoint-toolkit.js` file and reference it with a script tag after the angular reference in your html file. Then reference the module in your app module definition.
