@@ -10,7 +10,7 @@ var app = angular.module('spUserProfileServiceExample', ['sharePointToolkit']);
 ```
 The following steps in this guide assume the above steps are completed. Below, you will find a reference for how to use the components in this module.
 
-# userProfileService
+## userProfileService
 A service that makes getting SharePoint user profile properties easier. The Angular service calls the SharePoint rest API to get the current user's properties and returns an object with the properties as functions of the object. The service only performs a lookup in the array of key value pairs returned from the API when the user property desired is referenced as a function on the object.
 ```javascript
 userProfileService.getUserProfile()
@@ -22,23 +22,19 @@ userProfileService.getUserProfile()
                 console.log(error);
             });
 ```
-## Usage
+### Usage
 See app.js for an example. Remember, this code must run from within a SharePoint site since it calls the SharePoint API.
 
-1.. Reference the module in your app module definition
-```javascript
-var app = angular.module('spUserProfileServiceExample', ['sharePointToolkit']);
-```
-2.. Inject the userProfileService into your controller/service/factory
+1.. Inject the userProfileService into your controller/service/factory
 ```javascript
 exampleController.$inject = ['userProfileService'];
 ```
-3.. Call the getUserProfile() async method of the userProfileService
+2.. Call the getUserProfile() async method of the userProfileService
 ```javascript
 userProfileService.getUserProfile()
     .then(success, error);
 ```
-4.. Access the properties of the response object by calling the properties as functions
+3.. Access the properties of the response object by calling the properties as functions
 ```javascript
 function success(response) {
     var firstName = response.FirstName();
@@ -50,7 +46,7 @@ function success(response) {
     var title = response.SPSJobTitle();
 ```
 
-## Configuration
+### Configuration
 You can add more properties to be returned from the userProfileService. Here are the properties returned by default.
 ```javascript
             'SPS-DistinguishedName',
@@ -84,7 +80,7 @@ var app = angular.module('yourModule', ['spUserProfile'])
             // etc... just remember properties is an array of strings
    }]);
 ```
-### Changing the URL
+#### Changing the URL
 If you want to modify the URL that the request for properties uses, set the `url` property of the `spUserProfileConfig` object.
 ```javascript
 var app = angular.module('yourModule', ['spUserProfile'])
@@ -92,3 +88,11 @@ var app = angular.module('yourModule', ['spUserProfile'])
             spUserProfileConfig.url = 'http://someotherdomain.com/_api/SP.UserProfiles.PeopleManager/GetMyProperties';
    }]);
 ```
+## requestDigestService
+A service that makes working with post and put requests easier by making sure the request digest value is always fresh (has not timed out since the user last reloaded the page). The default timeout period for the digest value is 30 minutes. Once the digest value has expired, any requests made with it will return a 403 Forbidden error. This service will get a new request digest value in the background each time the value is about to expire. All you have to do is inject the service and use `requestDigestService.requestDigest` for the value of your 'X-RequestDigest' header.
+
+### Usage
+1.. Inject the `requestDigestFactory` into your controller/service/factory
+```javascript
+```
+
