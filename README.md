@@ -102,7 +102,7 @@ function exampleController(requestDigestFactory) { ... }
 ```javascript
 $http({
    method: 'POST',
-   url: 'http://someDomain,
+   url: 'http://someDomain',
    headers: {
       'Content-Type': 'application/json;odata=verbose',
       'Accept': 'application/json;odata=verbose',
