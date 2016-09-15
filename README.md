@@ -1,5 +1,17 @@
-# angular-spuserprofile
-A simple Angular module for getting SharePoint User Profile properties. The Angular service calls the SharePoint rest API to get the current user's properties and returns an object with the user properties as functions of the object. The service only performs a lookup in the array of key value pairs returned from the API when the property desired is referenced as a function on the object.
+# Angular SharePoint Toolkit
+An AngularJS module that simplifies common tasks when writing Angular apps for SharePoint, such as getting user profile properties and getting an always-current request digest value for use in post and put requests. At this time, the module contains these two components than can be injected into your components:
+- **userProfileService**
+- **requestDigestService**
+
+##Installation
+Download the `angular-sharepoint-toolkit.js` file and reference it with a script tag after the angular reference in your html file. Then reference the module in your app module definition.
+```javascript
+var app = angular.module('spUserProfileServiceExample', ['sharePointToolkit']);
+```
+The following steps in this guide assume the above steps are completed. Below, you will find a reference for how to use the components in this module.
+
+# userProfileService
+A service that makes getting SharePoint user profile properties easier. The Angular service calls the SharePoint rest API to get the current user's properties and returns an object with the properties as functions of the object. The service only performs a lookup in the array of key value pairs returned from the API when the user property desired is referenced as a function on the object.
 ```javascript
 userProfileService.getUserProfile()
             .then(function(response) {
@@ -10,15 +22,12 @@ userProfileService.getUserProfile()
                 console.log(error);
             });
 ```
-##Installation
-Download the `angular-spuserprofile.js` file and reference it with a script tag after the angular reference in your html file.
-
 ## Usage
 See app.js for an example. Remember, this code must run from within a SharePoint site since it calls the SharePoint API.
 
 1.. Reference the module in your app module definition
 ```javascript
-var app = angular.module('spUserProfileExample', ['spUserProfile']);
+var app = angular.module('spUserProfileServiceExample', ['sharePointToolkit']);
 ```
 2.. Inject the userProfileService into your controller/service/factory
 ```javascript
