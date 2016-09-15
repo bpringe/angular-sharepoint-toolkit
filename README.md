@@ -28,6 +28,7 @@ See app.js for an example. Remember, this code must run from within a SharePoint
 1.. Inject the userProfileService into your controller/service/factory
 ```javascript
 exampleController.$inject = ['userProfileService'];
+function exampleController(userProfileService) { ... }
 ```
 2.. Call the getUserProfile() async method of the userProfileService
 ```javascript
@@ -94,5 +95,20 @@ A service that makes working with post and put requests easier by making sure th
 ### Usage
 1.. Inject the `requestDigestFactory` into your controller/service/factory
 ```javascript
+exampleController.$inject = ['requestDigestFactory'];
+function exampleController(requestDigestFactory) { ... }
+```
+2.. In your http request, set the 'X-RequestDigest' header value using the service property
+```javascript
+$http({
+   method: 'POST',
+   url: 'http://someDomain,
+   headers: {
+      'Content-Type': 'application/json;odata=verbose',
+      'Accept': 'application/json;odata=verbose',
+      'X-RequestDigest': requestDigestService.requestDigest
+   },
+   data: yourData
+});
 ```
 
