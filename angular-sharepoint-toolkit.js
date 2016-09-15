@@ -1,7 +1,7 @@
 (function() {
-    var app = angular.module('spUserProfile', []);
+    var app = angular.module('sharePointToolkit', []);
 
-    app.constant('spUserProfileConfig', {
+    app.constant('userProfileServiceConfig', {
         userProperties: [
             'SPS-DistinguishedName',
             'SID',
@@ -27,11 +27,14 @@
         ],
         url: _spPageContextInfo.siteAbsoluteUrl + '/_api/SP.UserProfiles.PeopleManager/GetMyProperties'
     });
+    
+    app.constant('requestDigestServiceConfig', {
+        siteUrl: _spPageContextInfo.siteAbsoluteUrl
+    });
 
-    ////////////////////////////// userProfileService
     app.service('userProfileService', userProfileService);
-    userProfileService.$inject = ['$http', '$q', 'UserProfileFactory', 'spUserProfileConfig'];
-    function userProfileService($http, $q, UserProfileFactory, spUserProfileConfig) {
+    userProfileService.$inject = ['$http', '$q', 'UserProfileFactory', 'userProfileServiceConfig'];
+    function userProfileService($http, $q, UserProfileFactory, userProfileServiceConfig) {
         var self = this;
         self.getUserProfile = getUserProfile;
 
@@ -41,7 +44,7 @@
             var request = 
                     $http({
                           method: 'GET',
-                          url: spUserProfileConfig.url,
+                          url: userProfileServiceConfig.url,
                           cache: true,
                           headers: {
                               Accept: 'application/json;odata=verbose'
@@ -60,14 +63,13 @@
         }
     }
 
-    ////////////////////////////// UserProfileFactory
     app.factory('UserProfileFactory', UserProfileFactory);
-    UserProfileFactory.$inject = ['spUserProfileConfig'];
-    function UserProfileFactory(spUserProfileConfig) {
+    UserProfileFactory.$inject = ['userProfileServiceConfig'];
+    function UserProfileFactory(userProfileServiceConfig) {
 
         function UserProfile(userProperties) {
             var properties = userProperties,
-                configProperties = spUserProfileConfig.userProperties,
+                configProperties = userProfileServiceConfig.userProperties,
                 self = this;
 
             for (var k = 0; k < configProperties.length; k++) {
@@ -93,6 +95,32 @@
 
         return {
             create: create
+        }
+    }
+
+    app.service('requestDigestService', requestDigestService);
+    requestDigestService.$inject = ['$http', 'requestDigestServiceConfig', '$timeout'];
+    function requestDigestService($http, requestDigestServiceConfig, $timeout) {
+        var self = this,
+            requestDigestTimeout;
+        self.requestDigest = '';
+
+        getRequestDigest();
+
+        function getRequestDigest() {
+            $http.post(requestDigestServiceConfig.siteUrl + '/_api/contextinfo', {}, {
+                headers: {
+                    'Accept': 'application/json;odata=verbose',
+                    'Content-Type': 'application/json;odata=verbose'
+                }
+            }).then(function (response) {
+                self.requestDigest = response.data.d.GetContextWebInformation.FormDigestValue;
+                requestDigestTimeout = response.data.d.GetContextWebInformation.FormDigestTimeoutSeconds - 10;
+                //console.log("Refreshing request digest -- requestDigestTimeout - " + requestDigestTimeout + ' seconds');
+                $timeout(getRequestDigest, requestDigestTimeout * 1000);
+            }, function(error) {
+                console.log('Error getting request digest: ' + error);
+            });
         }
     }
 })();
