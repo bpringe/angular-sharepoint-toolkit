@@ -95,10 +95,10 @@ var app = angular.module('yourModule', ['spUserProfile'])
 A service that makes working with post and put requests easier by making sure the request digest value is always fresh (has not timed out since the user last reloaded the page). The default timeout period for the digest value is 30 minutes. Once the digest value has expired, any requests made with it will return a 403 Forbidden error. This service will get a new request digest value in the background each time the value is about to expire. All you have to do is inject the service and use `requestDigestService.requestDigest` for the value of your 'X-RequestDigest' header.
 
 ### Usage
-1.. Inject the `requestDigestFactory` into your controller/service/factory
+1.. Inject the `requestDigestService` into your controller/service/factory
 ```javascript
-exampleController.$inject = ['requestDigestFactory'];
-function exampleController(requestDigestFactory) { ... }
+exampleController.$inject = ['requestDigestService'];
+function exampleController(requestDigestService) { ... }
 ```
 2.. In your http request, set the 'X-RequestDigest' header value using the service property
 ```javascript
