@@ -3,6 +3,7 @@ An AngularJS module that simplifies common tasks when writing Angular apps for S
 - **userProfileService**
 - **requestDigestService**
 
+More components will be added over time.
 ##Installation
 Download the `angular-sharepoint-toolkit.js` file and reference it with a script tag after the angular reference in your html file. Then reference the module in your app module definition.
 ```javascript
